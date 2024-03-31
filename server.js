@@ -11,7 +11,7 @@ const app = express();
 
 // Set up CORS
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3001'],
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3001', 'https://ned-x-efua-wed.we-devsgh.online'],
     methods: 'GET',
 }));
 
