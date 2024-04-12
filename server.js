@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 const { v4: uuidv4 } = require('uuid');
 const cors = require('cors');
 const winston = require('winston');
+const WebSocket = require('ws');
+
 dotenv.config();
 
 const app = express();
@@ -45,17 +47,34 @@ db.once('open', () => {
     logger.info('Connected to MongoDB');
 });
 
-// Set up express-session
+// Initialize WebSocket server
+const wss = new WebSocket.Server({ port: 8080 });
 
+wss.on('connection', function connection(ws) {
+    logger.info('Client connected');
+  
+    ws.on('message', function incoming(message) {
+        logger.info('Received message:', message);
+    });
+
+    ws.on('close', function close() {
+        logger.info('Client disconnected');
+    });
+
+    ws.on('error', function error(err) {
+        logger.error('WebSocket error:', err);
+    });
+});
+
+// Set up express-session
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// const userSchema = require('./allrsvps-schemas');
-// const User = mongoose.model('efuaxnedrsvp', userSchema);
-
 const uploadSchema = require('./alluploads-schemas');
-const Upload = mongoose.model('gerixtrigrsvp', uploadSchema);
+const userSchema = require('./allrsvps-schemas');
 
+const User = mongoose.model('gerixtrigrsvp', userSchema);
+const Upload = mongoose.model('gerixtrigsharedimages', uploadSchema);
 
 // Register endpoint
 app.post('/rsvp', async (req, res) => {
@@ -90,6 +109,11 @@ app.post('/upload', async (req, res) => {
         await upload.save();
 
         logger.info('Images saved:', upload);
+
+        wss.clients.forEach(client => {
+            client.send('New photo uploaded');
+          });
+
         res.json({ message: 'Images saved' });
         } catch (error) {
         // Log and send error response
@@ -97,6 +121,20 @@ app.post('/upload', async (req, res) => {
         res.status(500).json({ error: 'Error during image upload' });
     }
 });
+
+
+// Get all image URLs
+app.get('/imageUrls', async (req, res) => {
+    try {
+      const uploads = await Upload.find();
+      const imageUrls = uploads.flatMap(upload => upload.imageUrls); // Use flatMap to flatten the array of arrays
+      res.json(imageUrls);
+    } catch (error) {
+      console.error('Error fetching image URLs:', error);
+      res.status(500).json({ error: 'Error fetching image URLs' });
+    }
+});
+
 
 
 
