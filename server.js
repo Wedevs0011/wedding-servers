@@ -10,7 +10,7 @@ const app = express();
 
 // Set up CORS
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3001', 'https://ned-x-efua-wed.we-devsgh.online'],
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3001', 'https://joeseph-x-geraldine.we-devsgh.online'],
     methods: 'GET',
 }));
 
@@ -18,7 +18,8 @@ app.use(cors({
 const logger = winston.createLogger({
     level: 'info',
     format: winston.format.json(),
-    defaultMeta: { service: 'efuaxned' },
+    // defaultMeta: { service: 'efuaxned' },
+    defaultMeta: { service: 'gerixtrig' },
     transports: [
         new winston.transports.File({ filename: 'error.log', level: 'error' }),
         new winston.transports.File({ filename: 'combined.log' }),
@@ -49,9 +50,12 @@ db.once('open', () => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const userSchema = require('./allrsvps-schemas');
+// const userSchema = require('./allrsvps-schemas');
+// const User = mongoose.model('efuaxnedrsvp', userSchema);
 
-const User = mongoose.model('efuaxnedrsvp', userSchema);
+const uploadSchema = require('./alluploads-schemas');
+const Upload = mongoose.model('gerixtrigrsvp', uploadSchema);
+
 
 // Register endpoint
 app.post('/rsvp', async (req, res) => {
@@ -76,6 +80,26 @@ app.post('/rsvp', async (req, res) => {
     }
 });
 
+
+app.post('/upload', async (req, res) => {
+    const imgUrls = req.body.images;
+    try {
+        const upload = new Upload({
+            imageUrls: imgUrls
+        });
+        await upload.save();
+
+        logger.info('Images saved:', upload);
+        res.json({ message: 'Images saved' });
+        } catch (error) {
+        // Log and send error response
+        logger.error('Error during image upload:', error);
+        res.status(500).json({ error: 'Error during image upload' });
+    }
+});
+
+
+
 // Login endpoint
 app.get('/dashboard', async (req, res) => {
     try {
@@ -93,7 +117,8 @@ app.get('/dashboard', async (req, res) => {
     }
 });
 
-const port = process.env.PORT || 5000;
+
+const port = process.env.PORT || 7000;
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
