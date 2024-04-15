@@ -37,7 +37,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // MongoDB connection
-mongoose.connect(process.env.DB_ACCESS);
+mongoose.connect(process.env.DB_ACCESS, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.on('error', (error) => {
