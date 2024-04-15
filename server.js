@@ -12,7 +12,7 @@ const app = express();
 
 // Set up CORS
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3001', 'https://joseph-x-geraldine.we-devsgh.online/rsvp'],
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3001', 'https://joseph-x-geraldine.we-devsgh.online/Rsvp'],
     methods: 'GET',
 }));
 
