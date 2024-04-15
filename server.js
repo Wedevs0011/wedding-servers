@@ -12,7 +12,7 @@ const app = express();
 
 // Set up CORS
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3001', 'https://joseph-x-geraldine.we-devsgh.online/'],
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3001', 'https://joseph-x-geraldine.we-devsgh.online/live-moments'],
     credentials: true,
 }
 )
@@ -37,7 +37,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // MongoDB connection
-mongoose.connect(process.env.DB_ACCESS, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.DB_ACCESS);
 const db = mongoose.connection;
 
 db.on('error', (error) => {

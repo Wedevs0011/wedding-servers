@@ -397,3 +397,23 @@
 {"level":"info","message":"Client connected","service":"gerixtrig"}
 {"level":"info","message":"Client disconnected","service":"gerixtrig"}
 {"level":"info","message":"Client disconnected","service":"gerixtrig"}
+{"level":"info","message":"Connected to MongoDB","service":"gerixtrig"}
+{"level":"info","message":"Client connected","service":"gerixtrig"}
+{"level":"info","message":"Client disconnected","service":"gerixtrig"}
+{"level":"info","message":"Client connected","service":"gerixtrig"}
+{"level":"info","message":"Client disconnected","service":"gerixtrig"}
+{"level":"info","message":"Client connected","service":"gerixtrig"}
+{"level":"info","message":"Client disconnected","service":"gerixtrig"}
+{"level":"info","message":"Client connected","service":"gerixtrig"}
+{"level":"info","message":"Client disconnected","service":"gerixtrig"}
+{"level":"info","message":"Client connected","service":"gerixtrig"}
+{"level":"info","message":"Client disconnected","service":"gerixtrig"}
+{"level":"info","message":"Client connected","service":"gerixtrig"}
+{"level":"info","message":"Client disconnected","service":"gerixtrig"}
+{"level":"info","message":"Client connected","service":"gerixtrig"}
+{"level":"info","message":"Client disconnected","service":"gerixtrig"}
+{"level":"info","message":"Client connected","service":"gerixtrig"}
+{"level":"info","message":"Client connected","service":"gerixtrig"}
+{"level":"info","message":"Client disconnected","service":"gerixtrig"}
+{"level":"info","message":"Connected to MongoDB","service":"gerixtrig"}
+{"$__":{"$versionError":null,"activePaths":{"paths":{"name":"require","uuid":"require"},"states":{"default":{},"modify":{},"require":{"name":true,"uuid":true}}},"backup":{"activePaths":{"default":{"_id":true},"modify":{"name":true,"uuid":true}},"validationError":null},"cachedRequired":{},"inserting":true,"op":null,"saveOptions":null,"savedState":{},"saving":null,"validating":null},"$isNew":false,"_doc":{"__v":0,"_id":"661c92cb79053649da5aa846","name":"Kurt","uuid":"2bf6aa14-330d-4a5f-b9bd-c4fb8b2b8f93"},"level":"info","message":"User saved:","service":"gerixtrig"}
