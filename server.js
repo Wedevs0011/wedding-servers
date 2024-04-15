@@ -14,7 +14,8 @@ const app = express();
 app.use(cors({
     origin: ['http://localhost:3000', 'http://127.0.0.1:3001', 'https://joseph-x-geraldine.we-devsgh.online/Rsvp'],
     credentials: true,
-}));
+})
+);
 
 // Set up logging
 const logger = winston.createLogger({
